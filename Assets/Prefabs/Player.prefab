@@ -76,6 +76,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c560ce95e577a64da5e19cc6908a298, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movingSprite: {fileID: 21300000, guid: c0592a6fff08d32429834c425bbe6372, type: 3}
+  stationarySprite: {fileID: 21300000, guid: 537331b1d3dbc0b4fa7b5f4bafdd7a4d, type: 3}
   movementSpeed: 5
   shipRotationSpeed: 100
   turretRotationSpeed: 4
@@ -927,5 +929,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f316a0a91c8fa9a42b04b0f1182a8304, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  overheadText: {fileID: 5699624093348592184}
   userName: {fileID: 6679041699296259746}

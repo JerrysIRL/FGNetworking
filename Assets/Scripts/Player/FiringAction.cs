@@ -14,7 +14,7 @@ public class FiringAction : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        playerController.onFireEvent += Fire;
+        playerController.OnFireEvent += Fire;
     }
 
     private void Fire(bool isShooting)

@@ -4,11 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class OverheadName : NetworkBehaviour
+public class OverheadName : MonoBehaviour
 {
     [SerializeField] private Name userName;
 
     private Text _overheadText; 
+    
     private void Start()
     {
         _overheadText = GetComponent<Text>();
@@ -21,9 +22,8 @@ public class OverheadName : NetworkBehaviour
         _overheadText.text = newValue.ToString();
     }
 
-    public override void OnDestroy()
+    public void OnDestroy()
     {
-        base.OnDestroy();
         userName.userNameNetwork.OnValueChanged -= ChangeUI;
     }
 }
