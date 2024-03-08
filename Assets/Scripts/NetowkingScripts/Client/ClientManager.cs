@@ -6,7 +6,6 @@ using Unity.Networking.Transport.Relay;
 using Unity.Services.Core;
 using Unity.Services.Relay;
 using Unity.Services.Relay.Models;
-
 using UnityEngine;
 using static FGAuthentication;
 
@@ -27,7 +26,7 @@ public class ClientManager : ScriptableObject
     }
 
 
-private async Task StartClientAsync(String ip, int port)
+    private async Task StartClientAsync(String ip, int port)
     {
         UnityTransport transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
         if (transport == null) return;
@@ -36,15 +35,15 @@ private async Task StartClientAsync(String ip, int port)
         await Task.Delay(0);
     }
 
-public async void StartMatchMaking(){
-    NetworkManager.Singleton.NetworkConfig.ConnectionData = UserDataWrapper.PayLoadInBytes();
-    MatchmakingResult matchmakingResult = await matchplayMatchmaker.Matchmake(UserDataWrapper.GetUserData());
-    if(matchmakingResult.result == MatchmakerPollingResult.Success){
-        await StartClientAsync(matchmakingResult.ip, matchmakingResult.port);
+    public async void StartMatchMaking()
+    {
+        NetworkManager.Singleton.NetworkConfig.ConnectionData = UserDataWrapper.PayLoadInBytes();
+        MatchmakingResult matchmakingResult = await matchplayMatchmaker.Matchmake(UserDataWrapper.GetUserData());
+        if (matchmakingResult.result == MatchmakerPollingResult.Success)
+        {
+            await StartClientAsync(matchmakingResult.ip, matchmakingResult.port);
+        }
     }
-
-}
-
 
 
     public async Task StartClientAsync(String joinCode)
@@ -52,12 +51,10 @@ public async void StartMatchMaking(){
         allocation = await Relay.Instance.JoinAllocationAsync(joinCode);
         UnityTransport transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
         if (transport == null) return;
-        RelayServerData relayServerData = new RelayServerData(allocation, "udp");   // dtls
+        RelayServerData relayServerData = new RelayServerData(allocation, "udp"); // dtls
         transport.SetRelayServerData(relayServerData);
         NetworkManager.Singleton.NetworkConfig.ConnectionData = UserDataWrapper.PayLoadInBytes();
 
         NetworkManager.Singleton.StartClient();
     }
-
-
 }

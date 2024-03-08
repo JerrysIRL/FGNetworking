@@ -12,8 +12,7 @@ public struct SavedClientInformation
 
 public static class SavedClientInformationManager
 {
-
-    private static List<SavedClientInformation> savedClientInformation = new ();
+    private static List<SavedClientInformation> savedClientInformation = new();
 
     // Method to add a client 
     public static void AddClient(UserData userData)
@@ -67,9 +66,8 @@ public static class SavedClientInformationManager
             if (networkID == client.networkID)
             {
                 savedClientInformation.Remove(client);
+                return;
             }
-
         }
-
     }
 }

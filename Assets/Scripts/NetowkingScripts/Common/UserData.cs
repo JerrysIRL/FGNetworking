@@ -13,8 +13,6 @@ public class UserData
     public GameData userGamePreferences;
 }
 
-
-
 public static class UserDataWrapper
 {
     private static UserData userData;

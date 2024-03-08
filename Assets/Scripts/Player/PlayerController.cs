@@ -35,18 +35,14 @@ public class PlayerController : NetworkBehaviour, IPlayerActions
             _playerInput.Player.SetCallbacks(this);
         }
         _playerInput.Player.Enable();
-
         _rb = GetComponent<Rigidbody2D>();
         _shipTransform = transform;
         turretPivotTransform = transform.Find("PivotTurret");
+        
         if (turretPivotTransform == null) Debug.LogError("PivotTurret is not found", gameObject);
     }
-
-
-
-
-
-    public void OnFire(UnityEngine.InputSystem.InputAction.CallbackContext context)
+    
+    public void OnFire(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
@@ -66,7 +62,7 @@ public class PlayerController : NetworkBehaviour, IPlayerActions
     private void FixedUpdate()
     {
         if (!IsOwner) return;
-        _rb.velocity = transform.up * _moveInput.y * movementSpeed;
+        _rb.velocity = transform.up * (_moveInput.y * movementSpeed);
         _rb.MoveRotation(_rb.rotation + _moveInput.x * -shipRotationSpeed * Time.fixedDeltaTime);
     }
     private void LateUpdate()
