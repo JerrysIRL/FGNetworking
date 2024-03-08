@@ -1,25 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthPickup : BasePickup
+namespace Mines
 {
-    [SerializeField] private int healthRegen = 25;
-    
-    public override void Interact(Collider2D other)
+    public class HealthPickup : BasePickup
     {
-        base.Interact(other);
-        if (IsServer)
+        [SerializeField] private int healthRegen = 25;
+
+        public override void Interact(Collider2D other)
         {
-            Health health = other.GetComponent<Health>();
-            if (!health) return;
-            health.ReceiveHealth(healthRegen);
+            if (IsServer)
+            {
+                Health health = other.GetComponent<Health>();
+                if (!health) return;
+                health.ReceiveHealth(healthRegen);
 
-            int xPosition = Random.Range(-4, 4);
-            int yPosition = Random.Range(-2, 2);
+                int xPosition = Random.Range(-4, 4);
+                int yPosition = Random.Range(-2, 2);
+               
 
+                transform.position = new Vector3(xPosition, yPosition, 0);
+            }
         }
     }
-    
-    
 }

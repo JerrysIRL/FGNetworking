@@ -1,22 +1,25 @@
 using Unity.Netcode;
+using Unity.Netcode.Components;
 using UnityEngine;
 
-public interface IInteractable
+namespace Mines
 {
-    public void Interact(Collider2D otherCollider);
-}
 
-[RequireComponent(typeof(Collider2D))]
-public class BasePickup : NetworkBehaviour, IInteractable
-{
-    private void OnTriggerEnter2D(Collider2D other)
+    [RequireComponent(typeof(Collider2D),
+        typeof(NetworkObject),
+        typeof(NetworkTransform))]
+    public abstract class BasePickup : NetworkBehaviour
     {
-        Interact(other);
-    }
+        private void Start()
+        {
+            GetComponent<Collider2D>().isTrigger = true;
+        }
 
-    public virtual void Interact(Collider2D other)
-    {
-        Debug.Log("Collided");
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            Interact(other);
+        }
+        
+        public abstract void Interact(Collider2D otherCollider);
     }
-
 }

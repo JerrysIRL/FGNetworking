@@ -1,53 +1,24 @@
-using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.UIElements;
 
-public class StandardMine : BasePickup
+namespace Mines
 {
-    [SerializeField] GameObject minePrefab;
-
-    /*void OnTriggerEnter2D(Collider2D other)
+    public class StandardMine : BasePickup
     {
-        if (IsServer)
+        [SerializeField] private int mineDamage = 25;
+
+        public override void Interact(Collider2D other)
         {
-            Health health = other.GetComponent<Health>();
-            if (!health) return;
-            health.TakeDamage(25);
+            if (IsServer)
+            {
+                Health health = other.GetComponent<Health>();
+                if (!health) return;
+                health.TakeDamage(mineDamage);
 
-            int xPosition = Random.Range(-4, 4);
-            int yPosition = Random.Range(-2, 2);
+                int xPosition = Random.Range(-4, 4);
+                int yPosition = Random.Range(-2, 2);
 
-
-            GameObject newMine = Instantiate(minePrefab, new Vector3(xPosition, yPosition, 0), Quaternion.identity);
-            NetworkObject no = newMine.GetComponent<NetworkObject>();
-            no.Spawn();
-
-
-            NetworkObject networkObject = gameObject.GetComponent<NetworkObject>();
-            networkObject.Despawn();
-        }
-    }*/
-
-    public override void Interact(Collider2D other)
-    {
-        base.Interact(other);
-        if (IsServer)
-        {
-            Health health = other.GetComponent<Health>();
-            if (!health) return;
-            health.TakeDamage(25);
-
-            int xPosition = Random.Range(-4, 4);
-            int yPosition = Random.Range(-2, 2);
-
-
-            GameObject newMine = Instantiate(minePrefab, new Vector3(xPosition, yPosition, 0), Quaternion.identity);
-            NetworkObject no = newMine.GetComponent<NetworkObject>();
-            no.Spawn();
-
-
-            NetworkObject networkObject = gameObject.GetComponent<NetworkObject>();
-            networkObject.Despawn();
+                transform.position = new Vector3(xPosition, yPosition, 0);
+            }
         }
     }
 }
