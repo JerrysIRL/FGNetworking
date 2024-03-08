@@ -20,4 +20,9 @@ public class Health : NetworkBehaviour
         currentHealth.Value += damage;
     }
 
+    public void ReceiveHealth(int healthAmount)
+    {
+        currentHealth.Value = Mathf.Clamp(currentHealth.Value + healthAmount, 0, 100);
+    }
+
 }
