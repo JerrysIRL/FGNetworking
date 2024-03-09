@@ -1,15 +1,14 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
+[RequireComponent(typeof(AmmoManager))]
 public class FiringAction : NetworkBehaviour
 {
     [SerializeField] PlayerController playerController;
     [SerializeField] GameObject clientSingleBulletPrefab;
     [SerializeField] GameObject serverSingleBulletPrefab;
     [SerializeField] Transform bulletSpawnPoint;
+    [SerializeField] AmmoManager ammoManager;
 
 
     public override void OnNetworkSpawn()
@@ -19,10 +18,9 @@ public class FiringAction : NetworkBehaviour
 
     private void Fire(bool isShooting)
     {
-
-        if (isShooting)
+        if (isShooting && ammoManager.ammoAmount.Value > 0)
         {
-            ShootLocalBullet();
+            ShootBullet();
         }
     }
 
@@ -31,6 +29,8 @@ public class FiringAction : NetworkBehaviour
     {
         GameObject bullet = Instantiate(serverSingleBulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
         Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), transform.GetComponent<Collider2D>());
+        ammoManager.DecreaseAmmo();
+        
         ShootBulletClientRpc();
     }
 
@@ -40,14 +40,18 @@ public class FiringAction : NetworkBehaviour
         if (IsOwner) return;
         GameObject bullet = Instantiate(clientSingleBulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
         Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), transform.GetComponent<Collider2D>());
-
     }
 
-    private void ShootLocalBullet()
+    private void ShootBullet()
     {
         GameObject bullet = Instantiate(clientSingleBulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
         Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), transform.GetComponent<Collider2D>());
 
         ShootBulletServerRpc();
+    }
+
+    public override void OnNetworkDespawn()
+    {
+        playerController.OnFireEvent -= Fire;
     }
 }

@@ -12,17 +12,18 @@ public class PlayerController : NetworkBehaviour, IPlayerActions
     private Vector2 _cursorLocation;
 
     private Rigidbody2D _rb;
-
     private Transform _turretPivotTransform;
 
     public UnityAction<bool> OnFireEvent;
-
-    [Header("Sprite Renderer")] public Sprite movingSprite;
+    
+    [Header("Sprite Renderer")] 
+    public Sprite movingSprite;
     public Sprite stationarySprite;
     private SpriteRenderer _renderer;
     private NetworkVariable<bool> _isMoving = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
-    [Header("Settings")] [SerializeField] private float movementSpeed = 5f;
+    [Header("Settings")] 
+    [SerializeField] private float movementSpeed = 5f;
     [SerializeField] private float shipRotationSpeed = 100f;
     [SerializeField] private float turretRotationSpeed = 4f;
 
@@ -53,10 +54,6 @@ public class PlayerController : NetworkBehaviour, IPlayerActions
         if (context.performed)
         {
             OnFireEvent.Invoke(true);
-        }
-        else if (context.canceled)
-        {
-            OnFireEvent.Invoke(false);
         }
     }
 
