@@ -6,15 +6,14 @@ public class NetworkServer : IDisposable
 {
     NetworkManager networkManager;
 
-
     public NetworkServer(NetworkManager networkManager)
     {
         this.networkManager = networkManager;
         networkManager.ConnectionApprovalCallback += ConnectionApproval;
-        NetworkManager.Singleton.OnClientDisconnectCallback += clientDisconnect;
+        NetworkManager.Singleton.OnClientDisconnectCallback += ClientDisconnect;
     }
 
-    private void clientDisconnect(ulong networkID)
+    private void ClientDisconnect(ulong networkID)
     {
         SavedClientInformationManager.RemoveClient(networkID);
     }
@@ -37,7 +36,7 @@ public class NetworkServer : IDisposable
         if (networkManager != null)
         {
             networkManager.ConnectionApprovalCallback -= ConnectionApproval;
-            NetworkManager.Singleton.OnClientDisconnectCallback -= clientDisconnect;
+            NetworkManager.Singleton.OnClientDisconnectCallback -= ClientDisconnect;
             if (networkManager.IsListening) networkManager.Shutdown();
         }
     }
