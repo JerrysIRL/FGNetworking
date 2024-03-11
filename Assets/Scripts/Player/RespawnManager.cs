@@ -15,9 +15,12 @@ public class RespawnManager : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        numberOfRespawns.Value = numOfRespawns;
         _collider2D = GetComponent<Collider2D>();
         _renderer = GetComponent<SpriteRenderer>();
+        
+        if (!IsServer)
+            return;
+        numberOfRespawns.Value = numOfRespawns;
     }
 
     public void HandleDeath()

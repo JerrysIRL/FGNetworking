@@ -20,6 +20,5 @@ public class AmmoManager : NetworkBehaviour
     public void DecreaseAmmo()
     {
         ammoAmount.Value = Mathf.Clamp(ammoAmount.Value - 1, 0, 100);
-        Debug.LogError(ammoAmount.Value);
     }
 }

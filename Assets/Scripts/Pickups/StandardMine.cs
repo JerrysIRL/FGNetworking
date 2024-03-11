@@ -11,7 +11,7 @@ namespace Mines
         {
             if (other.TryGetComponent(out Health health))
             {
-                health.ChangeHealth(-mineDamage);
+                health.TakeDamage(-mineDamage);
             }
         }
     }
