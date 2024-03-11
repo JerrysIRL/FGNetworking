@@ -17,6 +17,10 @@ public class Health : NetworkBehaviour
     public void ChangeHealth(int healthAmount)
     {
         currentHealth.Value = Mathf.Clamp(currentHealth.Value + healthAmount, 0, 100);
+        if (currentHealth.Value == 0)
+        {
+            NetworkObject.Despawn();
+        }
     }
 
 }

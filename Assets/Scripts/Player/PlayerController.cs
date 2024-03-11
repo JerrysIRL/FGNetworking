@@ -15,15 +15,14 @@ public class PlayerController : NetworkBehaviour, IPlayerActions
     private Transform _turretPivotTransform;
 
     public UnityAction<bool> OnFireEvent;
-    
-    [Header("Sprite Renderer")] 
-    public Sprite movingSprite;
-    public Sprite stationarySprite;
+
+    [Header("Sprite Renderer")] [SerializeField]
+    Sprite movingSprite, stationarySprite;
+
     private SpriteRenderer _renderer;
     private NetworkVariable<bool> _isMoving = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
-    [Header("Settings")] 
-    [SerializeField] private float movementSpeed = 5f;
+    [Header("Settings")] [SerializeField] private float movementSpeed = 5f;
     [SerializeField] private float shipRotationSpeed = 100f;
     [SerializeField] private float turretRotationSpeed = 4f;
 
@@ -32,8 +31,9 @@ public class PlayerController : NetworkBehaviour, IPlayerActions
         _renderer = GetComponent<SpriteRenderer>();
         _isMoving.Value = false;
         _isMoving.OnValueChanged += UpdateSprite;
-        if (!IsOwner) return;
 
+        if (!IsOwner)
+            return;
         if (_playerInput == null)
         {
             _playerInput = new();
@@ -73,7 +73,8 @@ public class PlayerController : NetworkBehaviour, IPlayerActions
 
     private void LateUpdate()
     {
-        if (!IsOwner) return;
+        if (!IsOwner)
+            return;
         Vector2 screenToWorldPosition = Camera.main.ScreenToWorldPoint(_cursorLocation);
         Vector2 targetDirection = new Vector2(screenToWorldPosition.x - _turretPivotTransform.position.x, screenToWorldPosition.y - _turretPivotTransform.position.y).normalized;
         Vector2 currentDirection = Vector2.Lerp(_turretPivotTransform.up, targetDirection, Time.deltaTime * turretRotationSpeed);
@@ -88,5 +89,13 @@ public class PlayerController : NetworkBehaviour, IPlayerActions
     public void OnAim(InputAction.CallbackContext context)
     {
         _cursorLocation = context.ReadValue<Vector2>();
+    }
+
+    public override void OnNetworkDespawn()
+    {
+        if (IsOwner)
+            _playerInput.Dispose();
+
+        _isMoving.OnValueChanged -= UpdateSprite;
     }
 }
