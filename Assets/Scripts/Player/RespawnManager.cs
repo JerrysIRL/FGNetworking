@@ -42,7 +42,7 @@ public class RespawnManager : NetworkBehaviour
 
     private IEnumerator Respawn(int invulnerabilitySeconds)
     {
-        _collider2D.isTrigger = false;
+        _collider2D.enabled = false;
         float timeElapsed = 0;
 
         while (timeElapsed <= invulnerabilitySeconds)
@@ -52,7 +52,7 @@ public class RespawnManager : NetworkBehaviour
             timeElapsed += FlashingDelay;
         }
 
-        _collider2D.isTrigger = true;
+        _collider2D.enabled = true;
         _renderer.enabled = true;
     }
 }
