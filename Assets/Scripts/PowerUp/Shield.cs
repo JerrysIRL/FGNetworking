@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -7,25 +8,24 @@ namespace PowerUp
     {
         private SpriteRenderer _renderer;
         private const int MaxValue = 2;
-        
-        public readonly NetworkVariable<int> HitPoints = new NetworkVariable<int>();
 
+        public readonly NetworkVariable<int> HitPoints = new NetworkVariable<int>();
+        
         public override void OnNetworkSpawn()
         {
             _renderer = GetComponent<SpriteRenderer>();
-            if (!IsServer)
-                return;
-            
-            HitPoints.OnValueChanged += OnShieldHit;
             HitPoints.Value = MaxValue;
+            HitPoints.OnValueChanged += OnShieldHit;
         }
 
         public void ResetShield()
         {
-            _renderer.enabled = true;
+            Debug.LogError("Reset Shield" + OwnerClientId);
+            Debug.LogError(_renderer);
             HitPoints.Value = MaxValue;
+            _renderer.enabled = true;
         }
-        
+
         private void OnShieldHit(int previousvalue, int newvalue)
         {
             if (newvalue == 0)
