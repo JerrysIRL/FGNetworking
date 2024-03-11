@@ -1,3 +1,4 @@
+
 using UnityEngine;
 
 namespace Mines
@@ -8,13 +9,9 @@ namespace Mines
 
         protected override void Interact(Collider2D other)
         {
-            if (IsServer)
+            if (other.TryGetComponent(out Health health))
             {
-                Health health = other.GetComponent<Health>();
-                if (!health) return;
                 health.ChangeHealth(healthRegen);
-                
-                SetRandomLocation();
             }
         }
     }

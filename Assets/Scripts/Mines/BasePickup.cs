@@ -1,3 +1,4 @@
+using Extensions;
 using Unity.Netcode;
 using Unity.Netcode.Components;
 using UnityEngine;
@@ -10,20 +11,15 @@ namespace Mines
         private void Start()
         {
             GetComponent<Collider2D>().isTrigger = true;
-            SetRandomLocation();
+            transform.SetRandomPositionOnScreen();
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
+            if (!other.CompareTag("Player") || !IsServer) 
+                return;
             Interact(other);
-        }
-
-        protected void SetRandomLocation()
-        {
-            int xPosition = Random.Range(-4, 4);
-            int yPosition = Random.Range(-2, 2);
-
-            transform.position = new Vector3(xPosition, yPosition, 0);
+            transform.SetRandomPositionOnScreen();
         }
 
         protected abstract void Interact(Collider2D otherCollider);
