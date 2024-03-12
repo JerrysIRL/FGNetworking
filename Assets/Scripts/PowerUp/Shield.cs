@@ -5,11 +5,11 @@ namespace PowerUp
 {
     public class Shield : NetworkBehaviour
     {
+        public readonly NetworkVariable<int> HitPoints = new NetworkVariable<int>(MaxValue);
+        
         private SpriteRenderer _renderer;
         private const int MaxValue = 2;
-
-        public readonly NetworkVariable<int> HitPoints = new NetworkVariable<int>(MaxValue);
-
+        
         private void Awake()
         {
             _renderer = GetComponent<SpriteRenderer>();
@@ -25,8 +25,6 @@ namespace PowerUp
 
         public void ResetShield(int previousvalue, int newvalue)
         {
-            Debug.LogError("Reset Shield" + OwnerClientId);
-            Debug.LogError(_renderer);
             _renderer.enabled = true;
             if (IsServer)
                 HitPoints.Value = MaxValue;

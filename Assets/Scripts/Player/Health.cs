@@ -19,9 +19,6 @@ public class Health : NetworkBehaviour
     
     public override void OnNetworkSpawn()
     {
-        //Death += shield.ResetShield;
-        Debug.Log("subscribed to reset shield : " + OwnerClientId);
-        
         respawnManager.numberOfRespawns.OnValueChanged += shield.ResetShield;
         
         if (!IsServer) return;
@@ -54,6 +51,6 @@ public class Health : NetworkBehaviour
     {
         Death -= respawnManager.HandleDeath;
         Death -= RestoreHealth;
-        //Death -= shield.ResetShield;
+        respawnManager.numberOfRespawns.OnValueChanged -= shield.ResetShield;
     }
 }
