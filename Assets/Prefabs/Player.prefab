@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1749074894
+  GlobalObjectIdHash: 823104612
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -238,8 +238,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1849a46e410f3134c88de7b66144d174, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  respawnManager: {fileID: 3082382615454112893}
   maxHealth: 100
+  respawnManager: {fileID: 3082382615454112893}
   shield: {fileID: 8177969423648285221}
   currentHealth:
     m_InternalValue: 100

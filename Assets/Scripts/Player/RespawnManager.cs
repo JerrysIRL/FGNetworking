@@ -27,6 +27,7 @@ public class RespawnManager : NetworkBehaviour
     {
         if (numberOfRespawns.Value == 0)
         {
+            //death
             NetworkManager.Shutdown();
             SceneManager.LoadScene("Splash");
             return;

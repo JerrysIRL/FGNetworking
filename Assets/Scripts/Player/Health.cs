@@ -2,8 +2,6 @@ using System;
 using PowerUp;
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.Serialization;
 
 
 [RequireComponent(typeof(RespawnManager))]
@@ -21,7 +19,10 @@ public class Health : NetworkBehaviour
     
     public override void OnNetworkSpawn()
     {
-        Death += shield.ResetShield;
+        //Death += shield.ResetShield;
+        Debug.Log("subscribed to reset shield : " + OwnerClientId);
+        
+        respawnManager.numberOfRespawns.OnValueChanged += shield.ResetShield;
         
         if (!IsServer) return;
         currentHealth.Value = maxHealth;
@@ -53,6 +54,6 @@ public class Health : NetworkBehaviour
     {
         Death -= respawnManager.HandleDeath;
         Death -= RestoreHealth;
-        Death -= shield.ResetShield;
+        //Death -= shield.ResetShield;
     }
 }
