@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 823104612
+  GlobalObjectIdHash: 1749074894
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -224,6 +224,7 @@ MonoBehaviour:
   playerController: {fileID: 5210888314493061672}
   clientSingleBulletPrefab: {fileID: 6137059209113163129, guid: eb95cbada454d9c4c8bd843bb9424b33, type: 3}
   serverSingleBulletPrefab: {fileID: 2699881094025181072, guid: 5a0f856cf7b9d3c4abbaba622df545d5, type: 3}
+  homingMissilePrefab: {fileID: 6726130711552142887, guid: 9cdec146664120f44b7fd8f7d4ec70aa, type: 3}
   bulletSpawnPoint: {fileID: 662702000496822912}
   ammoManager: {fileID: 1229353921929553539}
 --- !u!114 &1795185787946825641
@@ -965,7 +966,7 @@ Transform:
   m_GameObject: {fileID: 7386821703780188367}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.011, y: 0.494, z: 0}
+  m_LocalPosition: {x: 0.011, y: 0.605, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
