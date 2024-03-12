@@ -40,7 +40,6 @@ What I did:
 Relevant commits: 
 
 - [00f52de](https://github.com/JerrysIRL/FGNetworking/commit/00f52de0d91c985bc60506ec9eacca0b4df0afab)
-- 
 
 What I did:
 - Inherits from BasePickup.cs
@@ -61,8 +60,9 @@ What I did:
 
 Relevant commits: 
 
-- 
-- 
+- [bbabe0a](https://github.com/JerrysIRL/FGNetworking/commit/bbabe0a6ba262b4fdcaec33cc9288e00949de5fe) 
+- [6cbef89](https://github.com/JerrysIRL/FGNetworking/commit/6cbef89d8091222a135afeb9758ffd82fcf3b720)
+- [5bcdc63](https://github.com/JerrysIRL/FGNetworking/commit/5bcdc63b2d47b02e082b6292e2c71f05fcd3262a) 
 
 What I did:
 -  Created a script `Shield.cs` which is added on Player on respawn. `NetworkVariable<int> HitPoints`. which keeps track of shields health.
@@ -72,7 +72,7 @@ What I did:
 
 Relevant commits: 
 
-- 
+- [73043ce](https://github.com/JerrysIRL/FGNetworking/commit/73043cea019ef15bec66535482b9ab6862fdf91e#diff-c6f6a0e090cc0b65e2a6249e4b75ff575e123868b9b7d73a0d3367bd3297ca83)
 
 What I did:
 - Created `RespawnManager.cs` which controlls respawns usign NetVar.
@@ -81,8 +81,7 @@ What I did:
 
 Relevant commits: 
 
-- 
-- 
+- [013f9fe](https://github.com/JerrysIRL/FGNetworking/commit/013f9febef655deba17fcfb598a3035ee4cc21c1)
 
 What I did:
 - When Player loses all respawnPoints I call NetworkManger.Shutdown() and send player to startingScene.
