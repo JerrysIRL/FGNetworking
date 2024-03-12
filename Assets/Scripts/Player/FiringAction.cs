@@ -1,3 +1,4 @@
+using Projectiles;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ public class FiringAction : NetworkBehaviour
     [SerializeField] PlayerController playerController;
     [SerializeField] GameObject clientSingleBulletPrefab;
     [SerializeField] GameObject serverSingleBulletPrefab;
+    [SerializeField] NetworkObject homingMissilePrefab;
     [SerializeField] Transform bulletSpawnPoint;
     [SerializeField] AmmoManager ammoManager;
 
@@ -14,6 +16,15 @@ public class FiringAction : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
         playerController.OnFireEvent += Fire;
+        playerController.MissileLaunchEvent += LaunchMissileRpc ;
+    }
+
+    [Rpc(SendTo.Server)]
+    private void LaunchMissileRpc()
+    {
+        var missile = NetworkManager.SpawnManager.InstantiateAndSpawn(homingMissilePrefab, position: bulletSpawnPoint.position, rotation: bulletSpawnPoint.rotation);
+        Physics2D.IgnoreCollision(missile.GetComponent<Collider2D>(), transform.GetComponent<Collider2D>());
+        missile.GetComponent<HomingMissile>().InitMissile(OwnerClientId);
     }
 
     private void Fire(bool isShooting)

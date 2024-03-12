@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SingleBulletDamage : MonoBehaviour
@@ -8,8 +6,7 @@ public class SingleBulletDamage : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Health health = other.transform.GetComponent<Health>();
-        if (health == null) return;
-        health.TakeDamage(-damage);
+        if(other.TryGetComponent(out Health health))
+            health.TakeDamage(-damage);
     }
 }

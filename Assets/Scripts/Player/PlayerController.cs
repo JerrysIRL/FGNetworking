@@ -15,6 +15,7 @@ public class PlayerController : NetworkBehaviour, IPlayerActions
     private Transform _turretPivotTransform;
 
     public UnityAction<bool> OnFireEvent;
+    public UnityAction MissileLaunchEvent;
 
     [Header("Sprite Renderer")] [SerializeField]
     Sprite movingSprite, stationarySprite;
@@ -29,11 +30,11 @@ public class PlayerController : NetworkBehaviour, IPlayerActions
     public override void OnNetworkSpawn()
     {
         _renderer = GetComponent<SpriteRenderer>();
-        _isMoving.Value = false;
         _isMoving.OnValueChanged += UpdateSprite;
 
         if (!IsOwner)
             return;
+
         if (_playerInput == null)
         {
             _playerInput = new();
@@ -52,9 +53,7 @@ public class PlayerController : NetworkBehaviour, IPlayerActions
     public void OnFire(InputAction.CallbackContext context)
     {
         if (context.performed)
-        {
             OnFireEvent.Invoke(true);
-        }
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -89,6 +88,12 @@ public class PlayerController : NetworkBehaviour, IPlayerActions
     public void OnAim(InputAction.CallbackContext context)
     {
         _cursorLocation = context.ReadValue<Vector2>();
+    }
+
+    public void OnFireHomingMissile(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            MissileLaunchEvent.Invoke();
     }
 
     public override void OnNetworkDespawn()
