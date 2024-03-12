@@ -53,7 +53,7 @@ namespace Projectiles
             if (!IsServer)
                 return;
             
-            if (TargetTransform == null)
+            if (!TargetTransform)
             {
                 _rb.velocity = transform.up * (movementSpeed * Time.fixedDeltaTime);
                 return;
@@ -70,11 +70,11 @@ namespace Projectiles
         {
             if (!IsServer || other.CompareTag("LocalBullet"))
                 return;
-
-            Debug.LogError("Collided");
+            
             if (other.TryGetComponent(out Health health))
                 health.TakeDamage(-damage);
          
+            Destroy(gameObject);
             NetworkObject.Despawn();
         }
     }

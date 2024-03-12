@@ -133,7 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 4126348984
+  GlobalObjectIdHash: 3072810003
   InScenePlacedSourceGlobalObjectIdHash: 3072810003
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -155,7 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 50
-  rotateSpeed: 175
+  rotateSpeed: 100
   damage: 50
 --- !u!70 &1085452368023730419
 CapsuleCollider2D:
