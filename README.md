@@ -75,8 +75,9 @@ Relevant commits:
 - [73043ce](https://github.com/JerrysIRL/FGNetworking/commit/73043cea019ef15bec66535482b9ab6862fdf91e#diff-c6f6a0e090cc0b65e2a6249e4b75ff575e123868b9b7d73a0d3367bd3297ca83)
 
 What I did:
-- Created `RespawnManager.cs` which controlls respawns usign NetVar.
+- Created `RespawnManager.cs` which controlls respawns using NetVar.
 - Added invulnerability IEnumerator upon revival.
+  
 ## Player Death (1p)
 
 Relevant commits: 
