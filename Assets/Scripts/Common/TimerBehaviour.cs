@@ -25,7 +25,7 @@ namespace Common
 
         private void HandleTimerEnd()
         {
-            OnTimerEnd.Invoke();
+            OnTimerEnd?.Invoke();
         }
 
         private void Update()
