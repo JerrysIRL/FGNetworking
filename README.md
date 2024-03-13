@@ -56,6 +56,15 @@ What I did:
 - I created a AmmoManager with `NetworkVariable<int> ammoAmount`. 
 - Added an extra condition in order to fire a bullet `ammoManager.ammoAmount.Value > 0`
 
+## Shot Timer (1p)
+
+Relevant commits: 
+- [1c556aa](https://github.com/JerrysIRL/FGNetworking/commit/1c556aa5635dc88eae5ec0216b36bcf2ffd64a09)
+
+What I did:
+- I created a raw C# class `Timer.cs` and networkBehaviour `TimerBehaviour.cs` for modularity.
+- TimerBehaviour has netVar<bool> which changes when the duration reaches 0.
+
 ## Shield Power-Up (2p)
 
 Relevant commits: 
@@ -99,7 +108,15 @@ What I did:
 - I get all connected clients from NetworkManager to find the closest Enemy.
 - Missile than chases the player until it hits or the Player destroys it using projectiles.
 
+## Burst of Speed Power-Up (1p)
 
+Relevant commits: 
+
+- [067c39d](https://github.com/JerrysIRL/FGNetworking/commit/067c39de7eb3822b92f95934959f7b14da6a64ef#diff-8a33bf7d07e4ebf5ca72056c234569e18cdd0db9fd8466228009e190813f0d97)
+
+What I did:
+- I created a coroutine which double the speed of the player of 0.5 seconds. Ability has a 2 second cooldown.
+- Called using ServerRpc
 
 ## Usage
 Use the following controls to play the game:
