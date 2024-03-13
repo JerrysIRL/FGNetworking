@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 6679041699296259746}
   - component: {fileID: 3082382615454112893}
   - component: {fileID: -8269674245482791958}
+  - component: {fileID: 3323103229733927939}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -59,7 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3519813835
+  GlobalObjectIdHash: 1749074894
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -83,7 +84,6 @@ MonoBehaviour:
   boostCooldown: 2
   movingSprite: {fileID: 21300000, guid: c0592a6fff08d32429834c425bbe6372, type: 3}
   stationarySprite: {fileID: 21300000, guid: 537331b1d3dbc0b4fa7b5f4bafdd7a4d, type: 3}
-  movementSpeed: 5
   shipRotationSpeed: 100
   turretRotationSpeed: 4
 --- !u!212 &214913618731102450
@@ -229,6 +229,8 @@ MonoBehaviour:
   homingMissilePrefab: {fileID: 6726130711552142887, guid: 9cdec146664120f44b7fd8f7d4ec70aa, type: 3}
   bulletSpawnPoint: {fileID: 662702000496822912}
   ammoManager: {fileID: 1229353921929553539}
+  rocketTimer: {fileID: 3323103229733927939}
+  rocketCooldown: 5
 --- !u!114 &1795185787946825641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -457,6 +459,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80d7c879794dfda4687da0e400131852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3323103229733927939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3076901462484674528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3988435128d4db0ab55c7f459905753, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timerFinished:
+    m_InternalValue: 0
 --- !u!1 &3147725339021067429
 GameObject:
   m_ObjectHideFlags: 0

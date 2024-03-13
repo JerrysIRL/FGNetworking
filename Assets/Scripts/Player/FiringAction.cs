@@ -1,6 +1,8 @@
+using Common;
 using Projectiles;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(AmmoManager))]
 public class FiringAction : NetworkBehaviour
@@ -11,17 +13,22 @@ public class FiringAction : NetworkBehaviour
     [SerializeField] NetworkObject homingMissilePrefab;
     [SerializeField] Transform bulletSpawnPoint;
     [SerializeField] AmmoManager ammoManager;
-
+    [Header("Shot Timer")]
+    [SerializeField] TimerBehaviour rocketTimer;
+    [SerializeField] private float rocketCooldown = 5f;
 
     public override void OnNetworkSpawn()
     {
         playerController.OnFireEvent += Fire;
-        playerController.MissileLaunchEvent += LaunchMissileRpc ;
+        playerController.MissileLaunchEvent += LaunchMissileRpc;
     }
 
     [Rpc(SendTo.Server)]
     private void LaunchMissileRpc()
     {
+        if (!rocketTimer.timerFinished.Value)
+            return;
+        rocketTimer.StartTimer(rocketCooldown);
         var missile = NetworkManager.SpawnManager.InstantiateAndSpawn(homingMissilePrefab, position: bulletSpawnPoint.position, rotation: bulletSpawnPoint.rotation);
         Physics2D.IgnoreCollision(missile.GetComponent<Collider2D>(), transform.GetComponent<Collider2D>());
         missile.GetComponent<HomingMissile>().InitMissile(OwnerClientId);
