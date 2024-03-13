@@ -1,6 +1,6 @@
 
 # FGNetworking
-13 Points right now, Aiming for VG.
+15 Points, Aiming for a VG.
 
 -------------------------------
 # Assignments
