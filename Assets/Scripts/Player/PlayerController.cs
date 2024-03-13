@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
@@ -17,34 +18,37 @@ public class PlayerController : NetworkBehaviour, IPlayerActions
     public UnityAction<bool> OnFireEvent;
     public UnityAction MissileLaunchEvent;
 
+    public float boostCooldown = 2f;
+    private readonly NetworkVariable<bool> _isBoostAvailable = new NetworkVariable<bool>(true);
+    
+    
     [Header("Sprite Renderer")] [SerializeField]
     Sprite movingSprite, stationarySprite;
 
     private SpriteRenderer _renderer;
     private NetworkVariable<bool> _isMoving = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
-    [Header("Settings")] [SerializeField] private float movementSpeed = 5f;
+    [Header("Settings")] 
     [SerializeField] private float shipRotationSpeed = 100f;
     [SerializeField] private float turretRotationSpeed = 4f;
+    private NetworkVariable<float> _movementSpeed = new NetworkVariable<float>(5f);
 
     public override void OnNetworkSpawn()
     {
         _renderer = GetComponent<SpriteRenderer>();
         _isMoving.OnValueChanged += UpdateSprite;
-
+       
         if (!IsOwner)
             return;
-
+        
         if (_playerInput == null)
         {
             _playerInput = new();
             _playerInput.Player.SetCallbacks(this);
         }
 
-
         _playerInput.Player.Enable();
         _rb = GetComponent<Rigidbody2D>();
-
         _turretPivotTransform = transform.Find("PivotTurret");
 
         if (_turretPivotTransform == null) Debug.LogError("PivotTurret is not found", gameObject);
@@ -64,7 +68,7 @@ public class PlayerController : NetworkBehaviour, IPlayerActions
     private void FixedUpdate()
     {
         if (!IsOwner) return;
-        _rb.velocity = transform.up * (_moveInput.y * movementSpeed);
+        _rb.velocity = transform.up * (_moveInput.y * _movementSpeed.Value);
         _rb.MoveRotation(_rb.rotation + _moveInput.x * -shipRotationSpeed * Time.fixedDeltaTime);
         _isMoving.Value = _rb.velocity.magnitude > 0;
     }
@@ -94,6 +98,31 @@ public class PlayerController : NetworkBehaviour, IPlayerActions
     {
         if (context.performed)
             MissileLaunchEvent.Invoke();
+    }
+
+    public void OnBoost(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (_isBoostAvailable.Value)
+                BoostRpc();
+        }
+    }
+
+    [Rpc(SendTo.Server)]
+    private void BoostRpc()
+    {
+        StartCoroutine(BoostCoroutine());
+    }
+
+    private IEnumerator BoostCoroutine()
+    {
+        _isBoostAvailable.Value = false;
+        _movementSpeed.Value *= 2;
+        yield return new WaitForSeconds(0.5f);
+        _movementSpeed.Value /= 2;
+        yield return new WaitForSeconds(boostCooldown);
+        _isBoostAvailable.Value = true;
     }
 
     public override void OnNetworkDespawn()
