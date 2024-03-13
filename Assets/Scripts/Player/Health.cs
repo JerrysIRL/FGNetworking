@@ -11,16 +11,16 @@ public class Health : NetworkBehaviour
     [SerializeField] private RespawnManager respawnManager;
     [SerializeField] private Shield shield;
 
-    private event Action Death = delegate {};
+    private event Action Death = delegate { };
 
     public NetworkVariable<int> currentHealth = new NetworkVariable<int>();
 
     private void RestoreHealth() => currentHealth.Value = maxHealth;
-    
+
     public override void OnNetworkSpawn()
     {
         respawnManager.numberOfRespawns.OnValueChanged += shield.ResetShield;
-        
+
         if (!IsServer) return;
         currentHealth.Value = maxHealth;
         Death += respawnManager.HandleDeath;

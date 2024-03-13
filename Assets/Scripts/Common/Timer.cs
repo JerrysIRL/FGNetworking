@@ -1,13 +1,12 @@
 ﻿using System;
-using UnityEngine;
 
 namespace Common
 {
     public class Timer
     {
         private float RemainingSeconds { get; set; }
-        public event Action OnTimerEnd; 
-        
+        public event Action OnTimerEnd;
+
         public Timer(float duration)
         {
             RemainingSeconds = duration;
@@ -15,9 +14,9 @@ namespace Common
 
         public void Tick(float deltaTime)
         {
-            if(RemainingSeconds == 0f)
+            if (RemainingSeconds == 0f)
                 return;
-            
+
             RemainingSeconds -= deltaTime;
             CheckForTimerEnd();
         }
@@ -26,6 +25,7 @@ namespace Common
         {
             if (RemainingSeconds > 0f)
                 return;
+
             RemainingSeconds = 0f;
             OnTimerEnd?.Invoke();
         }
