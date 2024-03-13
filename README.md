@@ -62,6 +62,7 @@ Relevant commits:
 - [1c556aa](https://github.com/JerrysIRL/FGNetworking/commit/1c556aa5635dc88eae5ec0216b36bcf2ffd64a09)
 
 What I did:
+- I added the cooldown to the Homing Missile, you can fire one every 5 seconds.
 - I created a raw C# class `Timer.cs` and networkBehaviour `TimerBehaviour.cs` for modularity.
 - TimerBehaviour has netVar<bool> which changes when the duration reaches 0.
 
