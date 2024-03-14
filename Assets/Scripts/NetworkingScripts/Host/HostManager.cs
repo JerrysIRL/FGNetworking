@@ -46,7 +46,7 @@ public class HostManager : ScriptableObject
         createLobbyOptions.Data = new Dictionary<string, DataObject>();
         createLobbyOptions.Data.Add(
             "JoinCode",
-            new DataObject(visibility: DataObject.VisibilityOptions.Member, joinCode)
+            new DataObject(visibility: DataObject.VisibilityOptions.Public, joinCode)
         );
         var lobby = await Lobbies.Instance.CreateLobbyAsync("No Name Lobby", MaxConnections, createLobbyOptions);
         lobbyID = lobby.Id;

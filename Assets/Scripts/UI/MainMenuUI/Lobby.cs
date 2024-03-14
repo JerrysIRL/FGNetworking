@@ -40,10 +40,6 @@ public class Lobby : MonoBehaviour
         _refreshButton.clicked += RefreshLobbies;
         //_listLobbiesScrollView.Add(CreateLobbyContainer(i));
         RefreshLobbies();
-
-
-
-
     }
 
     private void OnDisable()
@@ -53,13 +49,11 @@ public class Lobby : MonoBehaviour
     }
 
 
-
- 
- private VisualElement CreateLobbyContainer(String userName, String joinCode, int currentPlayerCount, int maxPlayerCount)
+    private VisualElement CreateLobbyContainer(String userName, String joinCode, int currentPlayerCount, int maxPlayerCount)
     {
         VisualElement lobbyContainer = new VisualElement();
         lobbyContainer.AddToClassList("lobbyContainer");
-        
+
         // Add a Label to the LobbyContainer for Lobby Name
         Label lobbyNameLabel = new Label(userName);
         lobbyNameLabel.AddToClassList("leftLabelLobby");
@@ -70,14 +64,12 @@ public class Lobby : MonoBehaviour
         joinButton.text = "Join Lobby";
         joinButton.AddToClassList("defaultButtonCLass");
 
-        joinButton.clicked += async ()=>{
-             await  ClientSingelton.GetInstance().StartClientAsync(joinCode);
-        };
+        joinButton.clicked += async () => { await ClientSingelton.GetInstance().StartClientAsync(joinCode); };
 
         lobbyContainer.Add(joinButton);
 
         // Add a Label to the LobbyContainer for Lobby Status
-        Label lobbyStatusLabel = new Label(currentPlayerCount+"/"+maxPlayerCount);
+        Label lobbyStatusLabel = new Label(currentPlayerCount + "/" + maxPlayerCount);
         lobbyStatusLabel.AddToClassList("rightLabelLobby");
         lobbyContainer.Add(lobbyStatusLabel);
 
@@ -91,32 +83,30 @@ public class Lobby : MonoBehaviour
         QueryLobbiesOptions options = new QueryLobbiesOptions();
         options.Count = 30;
 
-        options.Filters = new List<QueryFilter>(){
-                new QueryFilter (
-                    field:QueryFilter.FieldOptions.AvailableSlots,
-                    op:QueryFilter.OpOptions.GT,
-                    value:"0"),
-                    new QueryFilter (
-                    field:QueryFilter.FieldOptions.IsLocked,
-                    op:QueryFilter.OpOptions.EQ,
-                    value:"0")
+        options.Filters = new List<QueryFilter>()
+        {
+            new QueryFilter(field: QueryFilter.FieldOptions.AvailableSlots, op: QueryFilter.OpOptions.GT, value: "0"),
+            new QueryFilter(field: QueryFilter.FieldOptions.IsLocked, op: QueryFilter.OpOptions.EQ, value: "0")
         };
 
         QueryResponse lobbies = await Lobbies.Instance.QueryLobbiesAsync(options);
 
+        Debug.Log(lobbies.Results.Count);
         _listLobbiesScrollView.Clear();
+
         foreach (var lobby in lobbies.Results)
         {
-            var joiningLobbyInstance = await Lobbies.Instance.JoinLobbyByIdAsync(lobby.Id);
+            var joiningLobbyInstance = await Lobbies.Instance.GetLobbyAsync(lobby.Id);
             string joinCode = joiningLobbyInstance.Data["JoinCode"].Value;
+            Debug.Log(joinCode);
             int currentPlayerCount = lobby.Players.Count;
             int maxPlayerCount = lobby.MaxPlayers;
-            
-            VisualElement lobbyCountainer = CreateLobbyContainer("Uknown Lobby Name", joinCode, currentPlayerCount, maxPlayerCount);
+
+            VisualElement lobbyCountainer = CreateLobbyContainer("Unknown Lobby Name", joinCode, currentPlayerCount, maxPlayerCount);
             _listLobbiesScrollView.Add(lobbyCountainer);
         }
 
-
+        isRefreshing = false;
     }
 
     private void BackToMainMenu()
@@ -124,7 +114,4 @@ public class Lobby : MonoBehaviour
         mainMenuGO.SetActive(true);
         gameObject.SetActive(false);
     }
-
-
-   
 }
