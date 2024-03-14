@@ -22,6 +22,11 @@ public class HostSingelton : Singleton<HostSingelton>
         InvokeRepeating(nameof(PingServer), 10, 10);
     }
 
+    public void StopHostPing()
+    {
+        CancelInvoke(nameof(PingServer));
+    }
+    
     private void PingServer()
     {
         hostManager.PingServer();

@@ -10,7 +10,14 @@ public class NetworkServer : IDisposable
     {
         this.networkManager = networkManager;
         networkManager.ConnectionApprovalCallback += ConnectionApproval;
-        NetworkManager.Singleton.OnClientDisconnectCallback += ClientDisconnect;
+        networkManager.OnClientDisconnectCallback += ClientDisconnect;
+        networkManager.OnServerStopped += ShutdownServer;
+    }
+
+    private void ShutdownServer(bool obj)
+    {
+        HostSingelton.GetInstance().StopHostPing();
+        Dispose();
     }
 
     private void ClientDisconnect(ulong networkID)
@@ -35,6 +42,7 @@ public class NetworkServer : IDisposable
     {
         if (networkManager != null)
         {
+            Debug.Log("Disposing network server");
             networkManager.ConnectionApprovalCallback -= ConnectionApproval;
             NetworkManager.Singleton.OnClientDisconnectCallback -= ClientDisconnect;
             if (networkManager.IsListening) networkManager.Shutdown();
