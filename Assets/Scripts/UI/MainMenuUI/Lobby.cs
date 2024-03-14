@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
 using UnityEngine;
 using UnityEngine.UIElements;
-
 
 public class Lobby : MonoBehaviour
 {
@@ -106,6 +106,7 @@ public class Lobby : MonoBehaviour
             _listLobbiesScrollView.Add(lobbyCountainer);
         }
 
+        await Task.Delay(1000);
         isRefreshing = false;
     }
 
