@@ -39,16 +39,18 @@ public class HostManager : ScriptableObject
 
         RelayServerData relayServerData = new RelayServerData(allocation, "udp"); // dtls
         transport.SetRelayServerData(relayServerData);
-// We gonna create lobby options
+        string playerName = PlayerPrefs.GetString("userName");
+        string lobbyName = $"{playerName}'s Lobby";
+        // We gonna create lobby options
         CreateLobbyOptions createLobbyOptions = new CreateLobbyOptions();
         createLobbyOptions.IsLocked = false;
         createLobbyOptions.IsPrivate = false;
-        createLobbyOptions.Data = new Dictionary<string, DataObject>();
-        createLobbyOptions.Data.Add(
-            "JoinCode",
-            new DataObject(visibility: DataObject.VisibilityOptions.Public, joinCode)
-        );
-        var lobby = await Lobbies.Instance.CreateLobbyAsync("No Name Lobby", MaxConnections, createLobbyOptions);
+        createLobbyOptions.Data = new Dictionary<string, DataObject>()
+        {
+            { "JoinCode", new DataObject(visibility: DataObject.VisibilityOptions.Public, joinCode) },
+            { "LobbyName", new DataObject(visibility: DataObject.VisibilityOptions.Public, lobbyName) }
+        };
+        var lobby = await Lobbies.Instance.CreateLobbyAsync(lobbyName, MaxConnections, createLobbyOptions);
         lobbyID = lobby.Id;
 
         NetworkServer networkServer = new NetworkServer(NetworkManager.Singleton);

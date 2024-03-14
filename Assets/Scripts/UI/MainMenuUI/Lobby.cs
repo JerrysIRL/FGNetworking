@@ -90,19 +90,18 @@ public class Lobby : MonoBehaviour
         };
 
         QueryResponse lobbies = await Lobbies.Instance.QueryLobbiesAsync(options);
-
-        Debug.Log(lobbies.Results.Count);
+        
         _listLobbiesScrollView.Clear();
 
         foreach (var lobby in lobbies.Results)
         {
             var joiningLobbyInstance = await Lobbies.Instance.GetLobbyAsync(lobby.Id);
             string joinCode = joiningLobbyInstance.Data["JoinCode"].Value;
-            Debug.Log(joinCode);
+            string lobbyName = joiningLobbyInstance.Data["LobbyName"].Value;
             int currentPlayerCount = lobby.Players.Count;
             int maxPlayerCount = lobby.MaxPlayers;
 
-            VisualElement lobbyCountainer = CreateLobbyContainer("Unknown Lobby Name", joinCode, currentPlayerCount, maxPlayerCount);
+            VisualElement lobbyCountainer = CreateLobbyContainer(lobbyName, joinCode, currentPlayerCount, maxPlayerCount);
             _listLobbiesScrollView.Add(lobbyCountainer);
         }
 
