@@ -42,7 +42,6 @@ public class NetworkServer : IDisposable
     {
         if (networkManager != null)
         {
-            Debug.Log("Disposing network server");
             networkManager.ConnectionApprovalCallback -= ConnectionApproval;
             NetworkManager.Singleton.OnClientDisconnectCallback -= ClientDisconnect;
             if (networkManager.IsListening) networkManager.Shutdown();

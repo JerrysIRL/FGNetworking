@@ -10,6 +10,7 @@ public class SavingUserNameUI : MonoBehaviour
 
     void Awake()
     {
+        
         bool isDedicated = (SystemInfo.graphicsDeviceType == UnityEngine.Rendering.GraphicsDeviceType.Null);
         if (isDedicated)
         {
