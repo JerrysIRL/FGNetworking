@@ -126,4 +126,5 @@ Use the following controls to play the game:
 | W and S |  moving up and down | 
 | A and D |  rotate left and right | 
 | SpaceBar |  Launch Missile | 
+| L Shift |  Dash / Boost | 
 | LMB |  Fire Projectile | 
