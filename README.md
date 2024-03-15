@@ -123,8 +123,8 @@ What I did:
 Use the following controls to play the game:
 | Controls | Explanation |
 | ------ | ------ |
-| W and S |  moving up and down | 
-| A and D |  rotate left and right | 
-| SpaceBar |  Launch Missile | 
+| W and S |  Moving Up and Down | 
+| A and D |  Rotate Left and Right | 
+| Space Bar |  Launch Missile | 
 | L Shift |  Dash / Boost | 
 | LMB |  Fire Projectile | 
