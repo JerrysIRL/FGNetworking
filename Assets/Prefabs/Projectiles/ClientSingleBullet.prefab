@@ -16,6 +16,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: LocalBullet
       objectReference: {fileID: 0}
+    - target: {fileID: 2644669253330833851, guid: 2879fa5cf33f14846b25324ba10feaaa, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5895046303076257260, guid: 2879fa5cf33f14846b25324ba10feaaa, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.36262888

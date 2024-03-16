@@ -68,14 +68,14 @@ namespace Projectiles
 
         void OnTriggerEnter2D(Collider2D other)
         {
-            if (!IsServer || other.CompareTag("LocalBullet"))
+            if (!IsServer)
                 return;
             
             if (other.TryGetComponent(out Health health))
                 health.TakeDamage(-damage);
-         
-            Destroy(gameObject);
-            NetworkObject.Despawn();
+            
+            if(NetworkObject.IsSpawned)
+                NetworkObject.Despawn();
         }
     }
 }
