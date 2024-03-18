@@ -6,8 +6,9 @@ namespace Common
     {
         private float RemainingSeconds { get; set; }
         public event Action OnTimerEnd;
+        
 
-        public Timer(float duration)
+        public void StartTimer(float duration)
         {
             RemainingSeconds = duration;
         }

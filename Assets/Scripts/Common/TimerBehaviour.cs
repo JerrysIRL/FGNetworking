@@ -8,19 +8,19 @@ namespace Common
     {
         public NetworkVariable<bool> timerFinished = new NetworkVariable<bool>();
         public event Action OnTimerEnd = null;
-        private Timer _timer;
+        private Timer _timer = new ();
 
         public override void OnNetworkSpawn()
         {
             timerFinished.Value = true;
+            _timer.OnTimerEnd += HandleTimerEnd;
+            OnTimerEnd += () => timerFinished.Value = true;
         }
 
         public void StartTimer(float duration)
         {
-            _timer = new Timer(duration);
-            _timer.OnTimerEnd += HandleTimerEnd;
+            _timer.StartTimer(duration);
             timerFinished.Value = false;
-            OnTimerEnd += () => timerFinished.Value = true;
         }
 
         private void HandleTimerEnd()
@@ -33,6 +33,11 @@ namespace Common
             if(!IsServer)
                 return;
             _timer?.Tick(Time.deltaTime);
+        }
+
+        public override void OnNetworkDespawn()
+        {
+            _timer.OnTimerEnd -= HandleTimerEnd;
         }
     }
 }

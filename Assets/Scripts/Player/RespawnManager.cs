@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class RespawnManager : NetworkBehaviour
 {
     [SerializeField] private int numOfRespawns = 3;
+    [SerializeField] private float invulnerabilitySeconds = 2;
     public NetworkVariable<int> numberOfRespawns = new NetworkVariable<int>();
 
     private Collider2D _collider2D;
@@ -41,15 +42,15 @@ public class RespawnManager : NetworkBehaviour
     [Rpc(SendTo.Everyone)]
     private void RespawnFuncRpc()
     {
-        StartCoroutine(Respawn(2));
+        StartCoroutine(Respawn(invulnerabilitySeconds));
     }
 
-    private IEnumerator Respawn(int invulnerabilitySeconds)
+    private IEnumerator Respawn(float invSeconds)
     {
         _collider2D.enabled = false;
         float timeElapsed = 0;
 
-        while (timeElapsed <= invulnerabilitySeconds)
+        while (timeElapsed <= invSeconds)
         {
             _renderer.enabled = !_renderer.enabled;
             yield return new WaitForSeconds(FlashingDelay);
