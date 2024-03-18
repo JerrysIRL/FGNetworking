@@ -19,7 +19,7 @@ What I did:
 Relevant scripts: 
 
 - [BasePickup.cs](https://github.com/JerrysIRL/FGNetworking/blob/main/Assets/Scripts/Pickups/BasePickup.cs)
-- [HealthPickup.cs](https://github.com/JerrysIRL/FGNetworking/blob/main/Assets/Scripts/Pickups/HealthPickup.cs))
+- [HealthPickup.cs](https://github.com/JerrysIRL/FGNetworking/blob/main/Assets/Scripts/Pickups/HealthPickup.cs)
 
 What I did:
 - Created `BasePickup.cs` for future pickups to minimized repetetive code.
