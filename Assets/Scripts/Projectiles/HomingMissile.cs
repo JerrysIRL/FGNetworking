@@ -50,15 +50,12 @@ namespace Projectiles
 
         private void FixedUpdate()
         {
-            if (!IsServer)
-                return;
-            
             if (!TargetTransform)
             {
                 _rb.velocity = transform.up * (movementSpeed * Time.fixedDeltaTime);
                 return;
             }
-
+            
             Vector2 directionToTarget = (TargetTransform.position - transform.position).normalized;
             float rotateAmount = Vector3.Cross(directionToTarget, transform.up).z;
 
