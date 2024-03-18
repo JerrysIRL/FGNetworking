@@ -6,9 +6,9 @@
 # Assignments
 ## Overhead Names (1p)
 
-Relevant commits: 
-- [3546b38](https://github.com/JerrysIRL/FGNetworking/commit/3546b3892db9110003db4f6e483741501e3c5628)
-- [d2e2d96](https://github.com/JerrysIRL/FGNetworking/commit/d2e2d96ef5f34e1da49ee74ba3393693de92fae5)
+Relevant scripts: 
+- [OverHeadName.cs](https://github.com/JerrysIRL/FGNetworking/blob/main/Assets/Scripts/Player/OverheadName.cs)
+- [Name.cs](https://github.com/JerrysIRL/FGNetworking/blob/main/Assets/Scripts/Player/Name.cs)
 
 What I did:
 - I get userName from `SaveClientInformationManager` using clientID
@@ -16,10 +16,10 @@ What I did:
 
 ## Health Packs (1p)
 
-Relevant commits: 
+Relevant scripts: 
 
-- [d2e2d96](https://github.com/JerrysIRL/FGNetworking/commit/d2e2d96ef5f34e1da49ee74ba3393693de92fae5)
-- [b2f8db0](https://github.com/JerrysIRL/FGNetworking/commit/b2f8db0065576356a09d4f53ebcd1655713000ab)
+- [BasePickup.cs](https://github.com/JerrysIRL/FGNetworking/blob/main/Assets/Scripts/Pickups/BasePickup.cs)
+- [HealthPickup.cs](https://github.com/JerrysIRL/FGNetworking/blob/main/Assets/Scripts/Pickups/HealthPickup.cs))
 
 What I did:
 - Created `BasePickup.cs` for future pickups to minimized repetetive code.
@@ -27,19 +27,18 @@ What I did:
 
 ## Sprite Renderer (1p)
 
-Relevant commits: 
+Relevant scripts: 
 
-- [4ed2f4d](https://github.com/JerrysIRL/FGNetworking/commit/4ed2f4dd29057d910be52221b970859a9e184dae)
-
+- [PlayerController.cs](https://github.com/JerrysIRL/FGNetworking/blob/main/Assets/Scripts/Player/PlayerController.cs)
 What I did:
 - I created a `NetworkVariable<bool> IsMoving` which is writable by the owner, because this feature has no gameplay impact. I set it true based on RigidBodies velocity.
 - Change sprite based on the bools value
 
 ## Ammo Packs (1p)
 
-Relevant commits: 
+Relevant scripts: 
 
-- [00f52de](https://github.com/JerrysIRL/FGNetworking/commit/00f52de0d91c985bc60506ec9eacca0b4df0afab)
+- [AmmoPickup.cs](https://github.com/JerrysIRL/FGNetworking/blob/main/Assets/Scripts/Pickups/AmmoPickup.cs)
 
 What I did:
 - Inherits from BasePickup.cs
@@ -47,10 +46,10 @@ What I did:
 
 ## Limited Ammo (1p)
 
-Relevant commits: 
+Relevant scripts: 
 
-- [00f52de](https://github.com/JerrysIRL/FGNetworking/commit/00f52de0d91c985bc60506ec9eacca0b4df0afab)
-- [54b5733](https://github.com/JerrysIRL/FGNetworking/commit/54b573398880ea372b9c2d30aad655edcd8e8f39#diff-69bcbbf001a381f979af0cb1522b6665470a52ca87545fb778f77bc992858a8e)
+- [AmmoManager.cs](https://github.com/JerrysIRL/FGNetworking/blob/main/Assets/Scripts/Player/AmmoManager.cs)
+- [FiringAction.cs](https://github.com/JerrysIRL/FGNetworking/blob/main/Assets/Scripts/Player/FiringAction.cs)
 
 What I did:
 - I created a AmmoManager with `NetworkVariable<int> ammoAmount`. 
@@ -58,8 +57,9 @@ What I did:
 
 ## Shot Timer (1p)
 
-Relevant commits: 
-- [1c556aa](https://github.com/JerrysIRL/FGNetworking/commit/1c556aa5635dc88eae5ec0216b36bcf2ffd64a09)
+Relevant scripts: 
+- [Timer.cs](https://github.com/JerrysIRL/FGNetworking/blob/main/Assets/Scripts/Common/Timer.cs)
+- [TimerBehaviour.cs](https://github.com/JerrysIRL/FGNetworking/blob/main/Assets/Scripts/Common/TimerBehaviour.cs)
 
 What I did:
 - I added the cooldown to the Homing Missile, you can fire one every 5 seconds.
@@ -68,11 +68,10 @@ What I did:
 
 ## Shield Power-Up (2p)
 
-Relevant commits: 
+Relevant scripts: 
 
-- [bbabe0a](https://github.com/JerrysIRL/FGNetworking/commit/bbabe0a6ba262b4fdcaec33cc9288e00949de5fe) 
-- [6cbef89](https://github.com/JerrysIRL/FGNetworking/commit/6cbef89d8091222a135afeb9758ffd82fcf3b720)
-- [5bcdc63](https://github.com/JerrysIRL/FGNetworking/commit/5bcdc63b2d47b02e082b6292e2c71f05fcd3262a) 
+- [Shield.cs](https://github.com/JerrysIRL/FGNetworking/blob/main/Assets/Scripts/PowerUp/Shield.cs)
+- [Health.cs](https://github.com/JerrysIRL/FGNetworking/blob/main/Assets/Scripts/Player/Health.cs#L30-L44)
 
 What I did:
 -  Created a script `Shield.cs` which is added on Player on respawn. `NetworkVariable<int> HitPoints`. which keeps track of shields health.
@@ -80,9 +79,9 @@ What I did:
 
 ## Limited Respawn (2p)
 
-Relevant commits: 
+Relevant scripts: 
 
-- [73043ce](https://github.com/JerrysIRL/FGNetworking/commit/73043cea019ef15bec66535482b9ab6862fdf91e#diff-c6f6a0e090cc0b65e2a6249e4b75ff575e123868b9b7d73a0d3367bd3297ca83)
+- [RespawnManager.cs](https://github.com/JerrysIRL/FGNetworking/blob/main/Assets/Scripts/Player/RespawnManager.cs)
 
 What I did:
 - Created `RespawnManager.cs` which controlls respawns using NetVar.
@@ -90,19 +89,19 @@ What I did:
   
 ## Player Death (1p)
 
-Relevant commits: 
+Relevant scripts: 
 
-- [013f9fe](https://github.com/JerrysIRL/FGNetworking/commit/013f9febef655deba17fcfb598a3035ee4cc21c1)
+- [RespawnManager.cs](https://github.com/JerrysIRL/FGNetworking/blob/main/Assets/Scripts/Player/RespawnManager.cs)
 
 What I did:
 - When Player loses all respawnPoints I call NetworkManger.Shutdown() and send player to startingScene.
 
 ## Homing Missile (3p)
 
-Relevant commits: 
+Relevant scripts: 
 
-- [dd73930](https://github.com/JerrysIRL/FGNetworking/commit/dd739301a36cb0eacb56cec839cf92cb93228d86)
-- [de1c1c5](https://github.com/JerrysIRL/FGNetworking/commit/de1c1c5c747b56f2c2482a9f351c5dd6eee0333b)
+- [HomingMissile.cs](https://github.com/JerrysIRL/FGNetworking/blob/main/Assets/Scripts/Projectiles/HomingMissile.cs)
+- [FiringAction.cs](https://github.com/JerrysIRL/FGNetworking/blob/main/Assets/Scripts/Player/FiringAction.cs#L26-L35)
 
 What I did:
 - Missile is owned by Server and Instantiated using ServerRpc
@@ -111,9 +110,9 @@ What I did:
 
 ## Burst of Speed Power-Up (1p)
 
-Relevant commits: 
+Relevant scripts: 
 
-- [067c39d](https://github.com/JerrysIRL/FGNetworking/commit/067c39de7eb3822b92f95934959f7b14da6a64ef#diff-8a33bf7d07e4ebf5ca72056c234569e18cdd0db9fd8466228009e190813f0d97)
+- [PlayerController.cs](https://github.com/JerrysIRL/FGNetworking/blob/main/Assets/Scripts/Player/PlayerController.cs#L112-L126)
 
 What I did:
 - I created a coroutine which double the speed of the player of 0.5 seconds. Ability has a 2 second cooldown.
