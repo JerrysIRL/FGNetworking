@@ -30,6 +30,7 @@ What I did:
 Relevant scripts: 
 
 - [PlayerController.cs](https://github.com/JerrysIRL/FGNetworking/blob/main/Assets/Scripts/Player/PlayerController.cs)
+  
 What I did:
 - I created a `NetworkVariable<bool> IsMoving` which is writable by the owner, because this feature has no gameplay impact. I set it true based on RigidBodies velocity.
 - Change sprite based on the bools value
