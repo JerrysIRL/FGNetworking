@@ -1,6 +1,4 @@
 # FGNetworking
-15 Points, Aiming for a VG.
-
 ![BoatsShooterNetworkGif](https://github.com/JerrysIRL/FGNetworking/assets/113015090/bc108705-044b-45e9-a861-f43206b8e29f)
 -------------------------------
 # Assignments
